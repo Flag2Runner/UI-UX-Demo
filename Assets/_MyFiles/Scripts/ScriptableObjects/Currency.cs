@@ -1,8 +1,11 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Currency", menuName = "Economy/Currency")]
-public class Currency : ScriptableObject
+namespace _MyFiles.Scripts.ScriptableObjects
 {
-    public string displayName;
-    public Sprite icon;
+    [CreateAssetMenu(fileName = "New Currency", menuName = "Economy/Currency")]
+    public class Currency : ScriptableObject
+    {
+        public string displayName;
+        public Sprite icon;
+    }
 }

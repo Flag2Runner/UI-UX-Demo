@@ -1,26 +1,30 @@
 using System.Collections.Generic;
+using _MyFiles.Scripts.ScriptableObjects;
 using UnityEngine;
 
-[System.Serializable]
-public class CurrencyBalance
+namespace _MyFiles.Scripts
 {
-    public Currency currencyType;
-    public int amount;
-}
-
-public class PlayerWallet : MonoBehaviour
-{
-    [Header("Player's Money")]
-    public List<CurrencyBalance> balances = new List<CurrencyBalance>();
-
-    public bool TryPurchase(ItemData item)
+    [System.Serializable]
+    public class CurrencyBalance
     {
-        CurrencyBalance balance = balances.Find(b => b.currencyType == item.costCurrency);
-        if (balance != null && balance.amount >= item.costAmount)
+        public Currency currencyType;
+        public int amount;
+    }
+
+    public class PlayerWallet : MonoBehaviour
+    {
+        [Header("Player's Money")]
+        public List<CurrencyBalance> balances = new List<CurrencyBalance>();
+
+        public bool TryPurchase(ItemData item)
         {
-            balance.amount -= item.costAmount;
-            return true;
+            CurrencyBalance balance = balances.Find(b => b.currencyType == item.costCurrency);
+            if (balance != null && balance.amount >= item.costAmount)
+            {
+                balance.amount -= item.costAmount;
+                return true;
+            }
+            return false;
         }
-        return false;
     }
 }

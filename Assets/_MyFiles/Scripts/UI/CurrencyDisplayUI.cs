@@ -1,15 +1,19 @@
+using _MyFiles.Scripts.ScriptableObjects;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-public class CurrencyDisplayUI : MonoBehaviour
+namespace _MyFiles.Scripts.UI
 {
-    public Image currencyIcon;
-    public TextMeshProUGUI amountText;
-
-    public void Setup(Currency currencyData, int amount)
+    public class CurrencyDisplayUI : MonoBehaviour
     {
-        if (currencyIcon != null && currencyData.icon != null) currencyIcon.sprite = currencyData.icon;
-        if (amountText != null) amountText.text = amount.ToString();
+        public Image currencyIcon;
+        public TextMeshProUGUI amountText;
+
+        public void Setup(Currency currencyData, int amount)
+        {
+            if (currencyIcon && currencyData.icon) currencyIcon.sprite = currencyData.icon;
+            if (amountText) amountText.text = amount.ToString();
+        }
     }
 }

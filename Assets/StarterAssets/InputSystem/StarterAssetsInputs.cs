@@ -1,5 +1,6 @@
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
+using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 #endif
 
@@ -12,6 +13,12 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
+		
+		[Header("Character Interaction")]
+		public bool interact;
+		public bool cancel;
+		public bool submit;
+		public bool paused;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -43,6 +50,27 @@ namespace StarterAssets
 		{
 			SprintInput(value.isPressed);
 		}
+
+		public void OnInteract(InputValue value)
+		{
+			InteractInput(value.isPressed);
+		}
+
+		public void Oncancel(InputValue value)
+		{
+			CancelInput(value.isPressed);
+		}
+		public void OnSubmit(InputValue value)
+		{
+			SubmitInput(value.isPressed);
+		}
+
+		public void OnPause(InputValue value)
+		{
+			PauseInput(value.isPressed);
+		}
+
+
 #endif
 
 
@@ -65,15 +93,34 @@ namespace StarterAssets
 		{
 			sprint = newSprintState;
 		}
+		private void InteractInput(bool newInteractState)
+		{
+			interact = newInteractState;
+		}
 		
-		private void OnApplicationFocus(bool hasFocus)
+		public void CancelInput(bool newCancelState)
+		{
+			cancel = newCancelState;
+		}
+		
+		public void SubmitInput(bool newSubmitState)
+		{
+			submit = newSubmitState;		
+		}
+		
+		/*private void OnApplicationFocus(bool hasFocus)
 		{
 			SetCursorState(cursorLocked);
-		}
+		}*/
 
 		private void SetCursorState(bool newState)
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+		}
+		
+		private void PauseInput(bool newPauseState)
+		{
+			paused = newPauseState;
 		}
 	}
 	
